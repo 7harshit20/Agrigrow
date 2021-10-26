@@ -9,14 +9,14 @@ require('./config/db').getConnection(err => {
     console.log('Connected to database');
 })
 
-// if (process.env.NODE_ENV != 'production' && !config.get('database_password')) {
-//     console.log('FATAL ERROR: database password not set');
-//     process.exit(1);
-// }
-// if (process.env.NODE_ENV != 'production' && !config.get('private_key')) {
-//     console.log('FATAL ERROR: jwt_key not set');
-//     process.exit(1);
-// }
+if (process.env.NODE_ENV != 'production' && !config.get('database_password')) {
+    console.log('FATAL ERROR: database password not set');
+    process.exit(1);
+}
+if (process.env.NODE_ENV != 'production' && !config.get('private_key')) {
+    console.log('FATAL ERROR: jwt_key not set');
+    process.exit(1);
+}
 
 app.use(express.json());
 app.use(require('cors')());
