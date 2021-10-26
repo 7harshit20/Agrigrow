@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const validate = require('../models/users');
 const mysql = require('mysql2');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../config/db');
 
