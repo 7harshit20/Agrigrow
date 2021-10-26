@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+      integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/customer_cart_style.css" />
+    <title>Customer Cart</title>
+  </head>
+
+  <body data-target="#main-nav">
+    <!-- NAV BAR START -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="main-nav">
+      <div class="container">
+        <h3 class="display-6"><i class="fas fa-seedling"></i>AgriGrow</h3>
+        <button
+          class="navbar-toggler"
+          data-toggle="collapse"
+          data-target="#navbarCollapse"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a href="./customer_homepage.html" class="nav-link">
+                <i class="fas fa-search"></i> Search Items</a
+              >
+            </li>
+            <!-- <li class="nav-item">
+                <a id="logout" href="#" class="nav-link">
+                  <i class="fas fa-cart-arrow-down"></i> Previours Orders</a>
+              </li> -->
+            <li class="nav-item active">
+              <a href="./customer_cart.html" class="nav-link">
+                <i class="fas fa-shopping-cart"></i> Cart</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="./customer_order.html" class="nav-link">
+                <i class="fas fa-list"></i> Order</a
+              >
+            </li>
+            <li class="nav-item">
+              <a id="logout" href="#" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i> Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- NAV BAR END -->
+
+    <!-- TABLE START -->
+    <section class="py-4">
+      <table class="table table-striped table-dark">
+        <thead class="bg-primary">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Commodity</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody id="display"></tbody>
+      </table>
+    </section>
+    <!-- TABLE END -->
+
+    <!-- FORM START -->
+    <div id="addressOrderCard" style="display: none" class="w-100">
+      <div class="card card-form" style="background-color: #333">
+        <div class="card-body">
+          <h4>Enter Address and complete order</h4>
+          <form id="form">
+            <div id="pos" class="form-group">
+              <input
+                required
+                id="_name"
+                type="text"
+                class="form-control form-control-sm w-50"
+                placeholder="Full name*"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                required
+                id="_mob"
+                type="number"
+                class="form-control form-control-sm w-50"
+                placeholder="Mobile number*"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                required
+                id="_pin"
+                type="number"
+                class="form-control form-control-sm w-50"
+                placeholder="6-digit PIN code*"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                required
+                id="_house"
+                type="text"
+                class="form-control form-control-sm w-50"
+                placeholder="Flat, House no., Building, Company, Apartment*"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                required
+                id="_area"
+                type="text"
+                class="form-control form-control-sm w-50"
+                placeholder="Area, Colony, Street, Sector, Village*"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                required
+                id="_landmark"
+                type="text"
+                class="form-control form-control-sm w-50"
+                placeholder="Landmark*"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                required
+                id="_city"
+                type="text"
+                class="form-control form-control-sm w-50"
+                placeholder="Town/City*"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                required
+                id="_state"
+                type="text"
+                class="form-control form-control-sm w-50"
+                placeholder="State*"
+              />
+            </div>
+          </form>
+          <button
+            id="place_order"
+            class="btn btn-outline-success btn-block w-50"
+          >
+            Place Order
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- FORM END -->
+
+    <section class="p-5">
+      <div class="container mt-5">
+        <div class="row mb-4"></div>
+      </div>
+    </section>
+
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+      integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../javascript/customer_cart_engine.js"></script>
+  </body>
+</html>

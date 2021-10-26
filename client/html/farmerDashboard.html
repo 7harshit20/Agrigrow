@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+      integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/farmerDashboard_style.css" />
+    <title>Homepage</title>
+  </head>
+
+  <body data-target="#main-nav">
+    <!-- NAV BAR START -->
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark" id="main-nav">
+      <div class="container">
+        <h3 class="display-6"><i class="fas fa-seedling"></i>AgriGrow</h3>
+        <button
+          class="navbar-toggler"
+          data-toggle="collapse"
+          data-target="#navbarCollapse"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav ml-auto">
+            <li
+              data-toggle="modal"
+              data-target="#login"
+              class="nav-item dropdown"
+            >
+              <a
+                href="#"
+                class="nav-link dropdown-toggle"
+                data-toggle="dropdown"
+              >
+                <i class="fas fa-cart-arrow-down"></i> Orders</a
+              >
+              <div class="dropdown-menu">
+                <a href="./farmer_neworder.html" class="dropdown-item">
+                  New orders
+                </a>
+                <a href="./farmer_approved.html" class="dropdown-item">
+                  Approved
+                </a>
+                <a href="./farmer_shipped.html" class="dropdown-item">
+                  Shipped
+                </a>
+                <a href="./farmer_delivered.html" class="dropdown-item">
+                  Delivered
+                </a>
+              </div>
+            </li>
+            <li class="nav-item active">
+              <a href="./farmerDashboard.html" class="nav-link">
+                <i class="fas fa-warehouse"></i> Inventory</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="./farmer_feedback.html" class="nav-link">
+                <i class="fas fa-comment-dots"></i> Feedback</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="./farmer_profile.html" class="nav-link">
+                <i class="fas fa-user-circle"></i> Profile
+              </a>
+            </li>
+            <li class="nav-item">
+              <a id="logout" href="#" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i> Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- NAV BAR END -->
+
+    <div class="container mt-5" id="btncon">
+      <button class="btn btn-primary w-100" id="addprobtn">Add Product</button>
+    </div>
+
+    <section class="p-5">
+      <div class="container">
+        <div id="display" class="row mb-4"></div>
+      </div>
+    </section>
+
+    <!-- ADD PRODUCT MODAL -->
+    <div class="modal fade text-white" id="addProductModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-dark">
+            <h5 class="modal-title">Add Product</h5>
+            <button class="close" data-dismiss="modal">
+              <span class="text-white">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body bg-dark">
+            <form id="form">
+              <div id="product_div" class="form-group">
+                <label for="name">Product Name</label>
+                <input id="product_name" type="text" class="form-control" />
+              </div>
+              <label for="name">Quantity</label>
+              <div class="input-group mb-2 mr-sm-2">
+                <input type="text" class="form-control" id="product_quantity" />
+                <div class="input-group-prepend">
+                  <div class="input-group-text">kg</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="price">Price per unit</label>
+                <input id="product_price" type="number" class="form-control" />
+              </div>
+              <label for="desc">Description</label>
+              <div class="form-group">
+                <textarea
+                  id="product_desc"
+                  name="desc"
+                  class="form-control"
+                  rows="3"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer bg-dark">
+            <button id="addProduct" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+      integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../javascript/farmerDashboardengine.js"></script>
+  </body>
+</html>

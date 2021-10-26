@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+      integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/index_style.css" />
+    <title>Homepage</title>
+  </head>
+  <body data-target="#main-nav">
+    <nav
+      class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top"
+      id="main-nav"
+    >
+      <div class="container">
+        <h3 class="display-6"><i class="fas fa-seedling"></i>AgriGrow</h3>
+        <button
+          class="navbar-toggler"
+          data-toggle="collapse"
+          data-target="#navbarCollapse"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav ml-auto">
+            <li data-toggle="modal" data-target="#login" class="nav-item">
+              <a href="#" class="nav-link">Login</a>
+            </li>
+            <!-- <li
+              data-toggle="modal"
+              data-target="#loginConsumer"
+              class="nav-item"
+            >
+              <a href="#" class="nav-link">Consumer</a>
+            </li>
+            <li
+              data-toggle="modal"
+              data-target="#loginTransporter"
+              class="nav-item"
+            >
+              <a href="#" class="nav-link">Transport</a>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MODALS -->
+    <div class="modal fade text-dark" id="login">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Login</h5>
+            <button class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="login_form">
+              <div class="form-group" id="login_div">
+                <label>Catergory</label>
+                <select
+                  name="category"
+                  class="form-control form-control-lg"
+                  id="login_category"
+                >
+                  <option value="farmer" selected>Farmer</option>
+                  <option value="customer">Consumer</option>
+                  <option value="transporter">
+                    Transport service provider
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="name">Email</label>
+                <input id="login_email" type="email" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                  id="login_password"
+                  type="password"
+                  class="form-control"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button id="_signin_submit" class="btn btn-success btn-block">
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- home section -->
+    <header id="home-section">
+      <div class="dark-overlay">
+        <div class="home-inner container">
+          <div class="row">
+            <div class="col-lg-6 d-none d-lg-block">
+              <h1 class="display-4">
+                <strong>SELL </strong> and <strong>BUY</strong> directly
+              </h1>
+              <div class="d-flex">
+                <div class="p-4 align-self-start">
+                  <i class="fas fa-arrow-alt-circle-right fa-2x"></i>
+                </div>
+                <div style="font-size: large" class="p-4 align-self-end">
+                  Farmers now can sell their produce directly to the consumer
+                  from the comfort of their farm.
+                </div>
+              </div>
+
+              <div class="d-flex">
+                <div class="p-4 align-self-start">
+                  <i class="fas fa-arrow-alt-circle-right fa-2x"></i>
+                </div>
+                <div style="font-size: large" class="p-4 align-self-end">
+                  Anyone can buy almost any farm product directly from the farm
+                  with the comfort of their home.
+                </div>
+              </div>
+
+              <div class="d-flex">
+                <div class="p-4 align-self-start">
+                  <i class="fas fa-arrow-alt-circle-right fa-2x"></i>
+                </div>
+                <div style="font-size: large" class="p-4 align-self-end">
+                  Transport service provide can use our platform to bridge in
+                  the gap between farmers and consumers.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="card bg-success text-center card-form">
+                <div class="card-body">
+                  <h3>Sign Up</h3>
+                  <p>Please fill out this form to register</p>
+                  <form id="form">
+                    <div id="select_category" class="form-group">
+                      <select
+                        name="signup_category"
+                        class="form-control form-control-md"
+                        id="category"
+                      >
+                        <option value="farmer">Farmer</option>
+                        <option value="customer">Consumer</option>
+                        <option value="transporter">
+                          Transport service provider
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <input
+                        id="_username"
+                        type="text"
+                        class="form-control form-control-md"
+                        placeholder="Name"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <input
+                        id="_email"
+                        type="email"
+                        class="form-control form-control-md"
+                        placeholder="Email"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <input
+                        id="_password"
+                        type="password"
+                        class="form-control form-control-md"
+                        placeholder="Password"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <input
+                        id="_Confirm_password"
+                        type="password"
+                        class="form-control form-control-md"
+                        placeholder="Confirm Password"
+                      />
+                    </div>
+                    <!-- <div class="form-group">
+                      <input
+                        id="_phone"
+                        type="number"
+                        class="form-control form-control-sm"
+                        placeholder="Phone"
+                      />
+                    </div> -->
+                    <!-- <div class="form-group">
+                      <input
+                        id="_address"
+                        type="text"
+                        class="form-control form-control-md"
+                        placeholder="Address"
+                      />
+                    </div> -->
+                    <p>Existing members use above links to login</p>
+                  </form>
+                  <button
+                    id="_signup_submit"
+                    class="btn btn-outline-light btn-block"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+      integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../javascript/indexengine.js"></script>
+  </body>
+</html>
+
+Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias dolores
+blanditiis ipsam fuga dolorem repudiandae quae dignissimos temporibus hic
+nesciunt minus consequuntur, delectus commodi molestias ad perferendis ipsum
+distinctio. Doloremque?
