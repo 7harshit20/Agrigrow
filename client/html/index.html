@@ -16,7 +16,57 @@
       integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../css/index_style.css" />
+    <style>
+      body {
+        color: #fff;
+      }
+
+      .navbar {
+        border-bottom: #3fbd50 3px solid;
+        opacity: 0.5;
+      }
+
+      #home-section {
+        background: url(../img/b1.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        min-height: 700px;
+      }
+
+      #home-section .dark-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-height: 700px;
+        background: rgba(0, 0, 0, 0.7);
+      }
+
+      #home-section .home-inner {
+        padding-top: 150px;
+      }
+
+      #home-section .card-form {
+        opacity: 0.8;
+      }
+
+      #home-section .fas,
+      #create-section .fas {
+        color: #84ec0c;
+        background: #fff;
+        padding: 5px;
+        border-radius: 50%;
+      }
+
+      #explore-section .fas,
+      #share-section .fas {
+        background: #333;
+        color: #fff;
+        padding: 5px;
+        border-radius: 5px;
+      }
+    </style>
     <title>Homepage</title>
   </head>
   <body data-target="#main-nav">

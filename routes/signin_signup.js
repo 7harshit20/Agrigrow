@@ -9,6 +9,10 @@ const db = require('../config/db');
 
 let sql, data;
 
+router.get('/', (req, res) => {
+    res.sendFile('index.html', { root: './client/html/' });
+});
+
 router.get('/check', (req, res) => {
     res.send('I am in');
 });
