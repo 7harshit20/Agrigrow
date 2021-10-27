@@ -28,5 +28,6 @@ app.use('/', require('./routes/signin_signup'));
 app.use('/farmer', require('./routes/farmer'));
 app.use('/customer', require('./routes/customer'));
 app.use('/transporter', require('./routes/transporter'));
-const port = 3000;
-app.listen(port, () => console.log('Listening on 3000'));
+
+
+app.listen(process.env.PORT || 3000);
