@@ -1,4 +1,7 @@
 {
-    "database_password": "agrodb_password",
-    "private_key": "secret_key"    
+    "private_key": "secret_key",
+    "database_host": "db_host",
+    "database_user": "db_user",
+    "database_name": "db_name",
+    "database_password": "db_password"    
 }

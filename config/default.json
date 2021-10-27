@@ -1,4 +1,7 @@
 {
-    "database_password": "",
-    "private_key": ""
+    "private_key": "",
+    "database_host": "",
+    "database_user": "",
+    "database_name": "",
+    "database_password": ""
 }
