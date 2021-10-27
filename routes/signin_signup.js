@@ -9,6 +9,10 @@ const db = require('../config/db');
 
 let sql, data;
 
+router.get('/check', (req, res) => {
+    res.send('I am in');
+});
+
 router.get('/create', async (req, res) => {
     let result;
     sql = 'CREATE TABLE farmer ( id INT PRIMARY KEY AUTO_INCREMENT,name VARCHAR(40) NOT NULL,email VARCHAR(40) NOT NULL UNIQUE,isAdmin BOOLEAN,password VARCHAR(1000) NOT NULL,successful_order INT DEFAULT 0,phone VARCHAR(10),gst VARCHAR(15),pan VARCHAR(10),bank VARCHAR(15),address VARCHAR(2000),city VARCHAR(15),state VARCHAR(15),pin VARCHAR(15));';
