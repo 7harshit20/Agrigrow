@@ -30,4 +30,4 @@ app.use('/customer', require('./routes/customer'));
 app.use('/transporter', require('./routes/transporter'));
 
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 5000);

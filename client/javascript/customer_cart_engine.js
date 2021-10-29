@@ -14,7 +14,7 @@ const orderBtn = document.getElementById('place_order');
 
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const res = await fetch('http://localhost:3000/customer/getCart/', {
+    const res = await fetch('https://agms.herokuapp.com/customer/getCart/', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (data.length !== 0) addressOrderCard.style.display = 'block';
     let num = 1;
     data.forEach(async (item) => {
-        const response = await fetch(`http://localhost:3000/customer/getProducts/id/${item.product_id}`, {
+        const response = await fetch(`https://agms.herokuapp.com/customer/getProducts/id/${item.product_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 output.addEventListener('click', async (e) => {
     if (e.target.parentElement.id !== 'check') return;
     const cartId = e.target.id;
-    await fetch(`http://localhost:3000/customer/deleteFromCart/${cartId}`, {
+    await fetch(`https://agms.herokuapp.com/customer/deleteFromCart/${cartId}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ orderBtn.addEventListener('click', async () => {
     const mobile = _mob.value.toString();
 
     let order;
-    const res = await fetch('http://localhost:3000/customer/getCart/', {
+    const res = await fetch('https://agms.herokuapp.com/customer/getCart/', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ orderBtn.addEventListener('click', async () => {
     });
     const data = await res.json();
     data.forEach(async (item) => {
-        const response = await fetch(`http://localhost:3000/customer/getProducts/id/${item.product_id}`, {
+        const response = await fetch(`https://agms.herokuapp.com/customer/getProducts/id/${item.product_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ orderBtn.addEventListener('click', async () => {
             address,
             mobile
         }
-        await fetch('http://localhost:3000/customer/placeOrder/', {
+        await fetch('https://agms.herokuapp.com/customer/placeOrder/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ orderBtn.addEventListener('click', async () => {
             body: JSON.stringify(order)
         });
     });
-    await fetch(`http://localhost:3000/customer/deleteFromCart/`, {
+    await fetch(`https://agms.herokuapp.com/customer/deleteFromCart/`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

@@ -1,7 +1,7 @@
 const output = document.getElementById('display');
 
 document.addEventListener('DOMContentLoaded', async (e) => {
-    const res = await fetch('http://localhost:3000/farmer/deliveredProducts', {
+    const res = await fetch('https://agms.herokuapp.com/farmer/deliveredProducts', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     });
     const data = await res.json();
     data.forEach(async (order, index) => {
-        const result = await fetch(`http://localhost:3000/farmer/getTransporter/${order.transporter_id}`, {
+        const result = await fetch(`https://agms.herokuapp.com/farmer/getTransporter/${order.transporter_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
             },
         });
         const tsp = await result.json();
-        const response = await fetch(`http://localhost:3000/customer/getProducts/id/${order.product_id}`, {
+        const response = await fetch(`https://agms.herokuapp.com/customer/getProducts/id/${order.product_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

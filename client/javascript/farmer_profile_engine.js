@@ -22,7 +22,7 @@ let set = false;
 
 document.addEventListener('DOMContentLoaded', async e => {
     // api to getfarmer
-    const res = await fetch('http://localhost:3000/farmer/get_profile', {
+    const res = await fetch('https://agms.herokuapp.com/farmer/get_profile', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ saveBtn.addEventListener('click', async (e) => {
         pin: _pin.value.toString()
     }
 
-    await fetch('http://localhost:3000/farmer/set_profile', {
+    await fetch('https://agms.herokuapp.com/farmer/set_profile', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

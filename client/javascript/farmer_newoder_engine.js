@@ -1,7 +1,7 @@
 const output = document.getElementById('display');
 
 document.addEventListener('DOMContentLoaded', async (e) => {
-    const res = await fetch('http://localhost:3000/farmer/newProducts', {
+    const res = await fetch('https://agms.herokuapp.com/farmer/newProducts', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     });
     const data = await res.json();
     data.forEach(async (order, index) => {
-        const response = await fetch(`http://localhost:3000/customer/getProducts/id/${order.product_id}`, {
+        const response = await fetch(`https://agms.herokuapp.com/customer/getProducts/id/${order.product_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 
 output.addEventListener('click', async (e) => {
     if (!e.target.className.includes('acceptOrd')) return;
-    await fetch(`http://localhost:3000/farmer/newProducts/${e.target.id}`, {
+    await fetch(`https://agms.herokuapp.com/farmer/newProducts/${e.target.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ output.addEventListener('click', async (e) => {
         remQuantity: e.target.parentElement.id,
         product_id: e.target.parentElement.parentElement.id
     }
-    await fetch(`http://localhost:3000/farmer/newProducts/${e.target.id}`, {
+    await fetch(`https://agms.herokuapp.com/farmer/newProducts/${e.target.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

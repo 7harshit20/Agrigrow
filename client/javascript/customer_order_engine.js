@@ -6,7 +6,7 @@ const cont = document.getElementById('cont');
 let soi, spi;
 
 document.addEventListener('DOMContentLoaded', async (e) => {
-    const res = await fetch('http://localhost:3000/customer/orders', {
+    const res = await fetch('https://agms.herokuapp.com/customer/orders', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     let num = 0;
     data.forEach(async (order) => {
 
-        const response = await fetch(`http://localhost:3000/customer/getProducts/id/${order.product_id}`, {
+        const response = await fetch(`https://agms.herokuapp.com/customer/getProducts/id/${order.product_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         });
         const product = await response.json();
 
-        const response2 = await fetch(`http://localhost:3000/customer/getFarmer/${product.farmer_id}`, {
+        const response2 = await fetch(`https://agms.herokuapp.com/customer/getFarmer/${product.farmer_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 
         let transporter;
         if (order.transporter_id) {
-            const response3 = await fetch(`http://localhost:3000/customer/getTransporter/${order.transporter_id}`, {
+            const response3 = await fetch(`https://agms.herokuapp.com/customer/getTransporter/${order.transporter_id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ rafsubmit.addEventListener('click', async (e) => {
         product_id: parseInt(spi)
     };
 
-    await fetch(`http://localhost:3000/customer/graf/${soi}`, {
+    await fetch(`https://agms.herokuapp.com/customer/graf/${soi}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

@@ -24,7 +24,7 @@ signin_submit.addEventListener('click', function () {
             category: login_category.value
         }
 
-        const res = await fetch(`http://localhost:3000/signin/${login_category.value}`, {
+        const res = await fetch(`https://agms.herokuapp.com/signin/${login_category.value}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -59,16 +59,16 @@ signup_submit.addEventListener('click', function () {
             confirm_password: confirm_password.value
         }
 
-        const res = await fetch(`http://localhost:3000/signup/${category.value}`, {
+        const res = await fetch(`https://agms.herokuapp.com/signup/${category.value}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(user)
         });
-        console.log(res);
+        // console.log(res);
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
         if (data.message) {
             displayError("form-control form-control-lg bg-warning", data.message, form, select_category);
             return;

@@ -2,7 +2,7 @@ const output = document.getElementById('display');
 const con = document.getElementById('con');
 
 document.addEventListener('DOMContentLoaded', async (e) => {
-    const res = await fetch('http://localhost:3000/transporter/acceptedProducts', {
+    const res = await fetch('https://agms.herokuapp.com/transporter/acceptedProducts', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     });
     const data = await res.json();
     data.forEach(async (order, index) => {
-        const response = await fetch(`http://localhost:3000/customer/getProducts/id/${order.product_id}`, {
+        const response = await fetch(`https://agms.herokuapp.com/customer/getProducts/id/${order.product_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         });
         const product = await response.json()
 
-        const result = await fetch(`http://localhost:3000/customer/getFarmer/${product.farmer_id}`, {
+        const result = await fetch(`https://agms.herokuapp.com/customer/getFarmer/${product.farmer_id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 output.addEventListener('click', async (e) => {
     if (e.target.parentElement.id !== 'shipOrd') return;
 
-    const checkres = await fetch('http://localhost:3000/transporter/get_profile', {
+    const checkres = await fetch('https://agms.herokuapp.com/transporter/get_profile', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ output.addEventListener('click', async (e) => {
         return;
     }
 
-    await fetch(`http://localhost:3000/transporter/acceptedProducts/${e.target.id}`, {
+    await fetch(`https://agms.herokuapp.com/transporter/acceptedProducts/${e.target.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

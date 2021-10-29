@@ -10,7 +10,7 @@ const btncon = document.getElementById('btncon');
 document.addEventListener('DOMContentLoaded', function (e) {
     // console.log('token',sessionStorage.getItem('token'));
     async function getProducts() {
-        const res = await fetch('http://localhost:3000/farmer/getProducts/myproducts', {
+        const res = await fetch('https://agms.herokuapp.com/farmer/getProducts/myproducts', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
 });
 
 document.getElementById('btncon').addEventListener('click', async (e) => {
-    const checkres = await fetch('http://localhost:3000/farmer/get_profile', {
+    const checkres = await fetch('https://agms.herokuapp.com/farmer/get_profile', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ document.getElementById('addProduct').addEventListener('click', function () {
     };
     async function sendProduct() {
 
-        const res = await fetch('http://localhost:3000/farmer/addProduct', {
+        const res = await fetch('https://agms.herokuapp.com/farmer/addProduct', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

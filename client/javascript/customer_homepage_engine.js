@@ -12,7 +12,7 @@ document.getElementById('search').addEventListener('click', function (e) {
             alert('Please enter some product name');
             return;
         };
-        const res = await fetch(`http://localhost:3000/customer/getProducts/${searchedproduct}`, {
+        const res = await fetch(`https://agms.herokuapp.com/customer/getProducts/${searchedproduct}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ document.getElementById('search').addEventListener('click', function (e) {
             num++;
             let colour = 'success';
             if (num % 2 !== 0) colour = 'dark';
-            const response = await fetch(`http://localhost:3000/customer/getFarmer/${product.farmer_id}`, {
+            const response = await fetch(`https://agms.herokuapp.com/customer/getFarmer/${product.farmer_id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ document.getElementById('cart_submit').addEventListener('click', async function 
         product_id: soi,
         quantity: document.getElementById('_quantity').value,
     }
-    await fetch('http://localhost:3000/customer/addToCart', {
+    await fetch('https://agms.herokuapp.com/customer/addToCart', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
