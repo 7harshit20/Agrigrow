@@ -101,7 +101,7 @@ orderBtn.addEventListener('click', async () => {
             address,
             mobile
         }
-        await fetch('https://agms.herokuapp.com/customer/placeOrder/', {
+        const por = await fetch('https://agms.herokuapp.com/customer/placeOrder/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -109,6 +109,7 @@ orderBtn.addEventListener('click', async () => {
             },
             body: JSON.stringify(order)
         });
+        console.log(por);
     });
     await fetch(`https://agms.herokuapp.com/customer/deleteFromCart/`, {
         method: 'DELETE',

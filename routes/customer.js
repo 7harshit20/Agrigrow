@@ -70,8 +70,14 @@ router.delete('/deleteFromCart/:id', authenticate, async (req, res) => {
 router.post('/placeOrder', authenticate, async (req, res) => {
     sql = 'INSERT INTO orders(customer_id, product_id, farmer_id, quantity, buyer, address, mobile, state) VALUES (?,?,?,?,?,?,?,?);'
     data = [req.user.id, req.body.product_id, req.body.farmer_id, req.body.quantity, req.body.buyer, req.body.address, req.body.mobile, 1];
-    const [result] = await db.promise().query(sql, data);
-    res.send(result);
+    try {
+        const [result] = await db.promise().query(sql, data);
+        res.send(result);
+    } catch (error) {
+        res.send([{
+            error
+        }])
+    }
 });
 
 
