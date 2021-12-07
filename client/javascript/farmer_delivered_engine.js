@@ -1,6 +1,9 @@
 const output = document.getElementById('display');
 
+// Loads the accepted order
 document.addEventListener('DOMContentLoaded', async (e) => {
+
+    // Request to fetch new orders
     const res = await fetch('https://agms.herokuapp.com/farmer/deliveredProducts', {
         method: 'GET',
         headers: {
@@ -9,7 +12,11 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         }
     });
     const data = await res.json();
+
+    // Displaying all the fetched orders
     data.forEach(async (order, index) => {
+
+        // Request to fetch details of transporter 
         const result = await fetch(`https://agms.herokuapp.com/farmer/getTransporter/${order.transporter_id}`, {
             method: 'GET',
             headers: {
@@ -18,6 +25,8 @@ document.addEventListener('DOMContentLoaded', async (e) => {
             },
         });
         const tsp = await result.json();
+
+        // Request to fetche details of buyer 
         const response = await fetch(`https://agms.herokuapp.com/customer/getProducts/id/${order.product_id}`, {
             method: 'GET',
             headers: {
@@ -27,6 +36,8 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 
         });
         const product = await response.json()
+
+        // Setting up html and placing it in dom
         let colour = 'success';
         if (index % 2 !== 0) colour = 'dark';
         output.innerHTML +=
@@ -51,6 +62,8 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     });
 });
 
+
+// Logs out the user
 document.getElementById('logout').addEventListener('click', function () {
     sessionStorage.removeItem('token');
     location.href = "../html/index.html";

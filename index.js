@@ -21,8 +21,8 @@ if (!config.get('private_key')) {
 
 app.use(express.json());
 app.use(require('cors')());
-if (process.env.NODE_ENV = 'production') app.use(require('helmet')());
-if (process.env.NODE_ENV = 'production') app.use(require('compression')());
+if (process.env.NODE_ENV === 'production') app.use(require('helmet')());
+if (process.env.NODE_ENV === 'production') app.use(require('compression')());
 
 app.use('/', require('./routes/signin_signup'));
 app.use('/farmer', require('./routes/farmer'));

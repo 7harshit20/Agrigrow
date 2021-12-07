@@ -5,7 +5,10 @@ const pos = document.getElementById('pos');
 const cont = document.getElementById('cont');
 let soi, spi;
 
+// Loads the placed order 
 document.addEventListener('DOMContentLoaded', async (e) => {
+
+    // Requests to fetch the placed order 
     const res = await fetch('https://agms.herokuapp.com/customer/orders', {
         method: 'GET',
         headers: {
@@ -14,9 +17,12 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         }
     });
     const data = await res.json();
+
+    // Setting up html and placing it in dom
     let num = 0;
     data.forEach(async (order) => {
 
+        // Request to fetch the product detail
         const response = await fetch(`https://agms.herokuapp.com/customer/getProducts/id/${order.product_id}`, {
             method: 'GET',
             headers: {
@@ -27,6 +33,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         });
         const product = await response.json();
 
+        // Request to fetch the farmer detail
         const response2 = await fetch(`https://agms.herokuapp.com/customer/getFarmer/${product.farmer_id}`, {
             method: 'GET',
             headers: {
@@ -37,6 +44,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         });
         const farmer = await response2.json();
 
+        // Request to fetch the transporter detail
         let transporter;
         if (order.transporter_id) {
             const response3 = await fetch(`https://agms.herokuapp.com/customer/getTransporter/${order.transporter_id}`, {
@@ -49,6 +57,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
             });
             transporter = await response3.json();
         }
+
         let colour = 'success';
         if (num % 2 !== 0) colour = 'dark';
         output.innerHTML +=
@@ -78,17 +87,20 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     });
 });
 
+// Selects the specified product
 output.addEventListener('click', e => {
     if (!e.target.className.includes('_special')) return;
     soi = e.target.id;
     spi = e.target.parentElement.id;
-    console.log(spi);
-
 });
 
+
+// Submit rating and feedback
 rafsubmit.addEventListener('click', async (e) => {
     let rin = document.getElementById('_rating').value;
     let fin = document.getElementById('_feedback').value;
+
+    // Gives warning if rating is inappropiate
     if (rin !== '0' && rin !== '1' && rin !== '2' && rin !== '3' && rin !== '4' && rin !== '5') {
         displayError("form-control form-control-lg bg-warning", "Rating must be a interger between 0 and 5", form, pos);
         return;
@@ -98,12 +110,12 @@ rafsubmit.addEventListener('click', async (e) => {
         return;
     }
 
+    // Requests to give the provied rating and feedback
     const rafobj = {
         rating: parseInt(rin),
         feedback: fin,
         product_id: parseInt(spi)
     };
-
     await fetch(`https://agms.herokuapp.com/customer/graf/${soi}`, {
         method: 'PUT',
         headers: {
@@ -112,14 +124,14 @@ rafsubmit.addEventListener('click', async (e) => {
         },
         body: JSON.stringify(rafobj)
     });
+
+    // Closes modal
     $('#giveraf').modal('hide');
     displayError('form-control form-control-lg bg-warning', 'Rating and Feedback saved', cont, display,)
-    // $('html, body').animate({ scrollTop: 0 }, 'fast');
 });
 
 
-
-
+// display error
 function displayError(cls, message, place, pos) {
     const error = document.createElement('div');
     error.className = 'form-group';
@@ -137,6 +149,8 @@ function displayError(cls, message, place, pos) {
     }, 3000)
 }
 
+
+// Logs out the user
 document.getElementById('logout').addEventListener('click', function () {
     sessionStorage.removeItem('token');
     location.href = "../html/index.html";

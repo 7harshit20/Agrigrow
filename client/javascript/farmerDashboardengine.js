@@ -1,4 +1,4 @@
-
+// Selecting the input fields and buttons
 const product_name = document.getElementById('product_name');
 const quantity = document.getElementById('product_quantity');
 const price = document.getElementById('product_price');
@@ -7,9 +7,11 @@ const form = document.getElementById('form');
 const addprobtn = document.getElementById('addprobtn');
 const btncon = document.getElementById('btncon');
 
+// Load products
 document.addEventListener('DOMContentLoaded', function (e) {
-    // console.log('token',sessionStorage.getItem('token'));
+
     async function getProducts() {
+        // Fetching products from backend
         const res = await fetch('https://agms.herokuapp.com/farmer/getProducts/myproducts', {
             method: 'GET',
             headers: {
@@ -18,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
             }
         });
         const data = await res.json();
+
+        // Displaying the fetched products
         let output = document.getElementById('display');
         let num = 0;
         data.forEach((product) => {
@@ -27,10 +31,12 @@ document.addEventListener('DOMContentLoaded', function (e) {
             }
             let rating = 0.0;
             if (product.deliveries) rating = product.stars / product.feedbacks;
+
+            // Setting up HTML
             output.innerHTML +=
                 `
             <div class="col-lg-4 p-3">
-                <div style="height: 475px;" class="card bg-${colour} text-white">
+                <div class="card bg-${colour} text-white">
                     <div class="card-header text-center">
                     <span style="font-size: 30px" class="align-middle">${product.name} </span>
                     <span style="border-radius: 16px; padding: 7px;" class="align-middle bg-danger"> ${rating} <i class="fas fa-star"></i></span>
@@ -58,7 +64,10 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
 });
 
+// Updating profile
 document.getElementById('btncon').addEventListener('click', async (e) => {
+
+    // Fetching seller's profile from backend
     const checkres = await fetch('https://agms.herokuapp.com/farmer/get_profile', {
         method: 'GET',
         headers: {
@@ -67,16 +76,22 @@ document.getElementById('btncon').addEventListener('click', async (e) => {
         }
     });
     const farmer = await checkres.json();
+
+    // Gives warning if profile is not set
     if (!farmer.phone) {
         displayError("form-control bg-warning", "Please complete your profile to add products", btncon, addprobtn);
         return;
     }
+
+    // Pops up product modal if profile is set 
     $("#addProductModal").modal()
 });
 
 
+// Adding new product
 document.getElementById('addProduct').addEventListener('click', function () {
 
+    // Creating object to be sent to bakcend
     const productObject = {
         name: product_name.value,
         quantity: quantity.value,
@@ -84,8 +99,9 @@ document.getElementById('addProduct').addEventListener('click', function () {
         price: price.value,
         desc: desc.value
     };
-    async function sendProduct() {
 
+    // Sending add product request to backend 
+    async function sendProduct() {
         const res = await fetch('https://agms.herokuapp.com/farmer/addProduct', {
             method: 'POST',
             headers: {
@@ -95,18 +111,24 @@ document.getElementById('addProduct').addEventListener('click', function () {
             body: JSON.stringify(productObject)
         });
         const data = await res.json();
-        console.log(data);
+
+        // Displays warning in case of any error
         if (data.message) {
             displayError("form-control bg-warning", data.message, form, product_div);
             return;
         }
+
+        // Closes the modal
+        $('#addProductModal').modal('hide');
+
+        // Reloads the page to display newly added product
         location.reload();
     }
     sendProduct();
 });
 
 
-
+// Function to display error
 function displayError(cls, message, place, pos) {
     const error = document.createElement('div');
     error.className = 'form-group';
@@ -124,6 +146,7 @@ function displayError(cls, message, place, pos) {
     }, 3000)
 }
 
+// Logs out user
 document.getElementById('logout').addEventListener('click', function () {
     sessionStorage.removeItem('token');
     location.href = "../html/index.html";
