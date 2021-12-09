@@ -3,5 +3,5 @@
     "database_host": "db_host",
     "database_user": "db_user",
     "database_name": "db_name",
-    "database_password": "db_password"    
+    "database_password": "db_password" 
 }

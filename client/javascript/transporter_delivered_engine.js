@@ -44,11 +44,11 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         output.innerHTML +=
             `
             <div class="col-md-4 p-3">
-                <div style="height: 400px;" class="card bg-${colour} text-white  ">
+                <div  class="card bg-${colour} text-white  ">
                     <div class="card-header text-center">
                         <h3>${product.name}</h3>
                     </div>
-                    <div style="height: 450px;" class="card-body ">
+                    <div class="card-body ">
                         Buyer's name: ${order.buyer} <br><br>
                         Buyer's address: <br> ${order.address} <br><br>
                         Quantity : ${order.quantity} kg <br><br>

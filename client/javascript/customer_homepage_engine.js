@@ -50,7 +50,7 @@ document.getElementById('search').addEventListener('click', function (e) {
             output.innerHTML +=
                 `
             <div class="col-md-4 p-3">
-                <div style="height: 550px;" class="card bg-${colour} text-white">
+                <div class="card bg-${colour} text-white">
                     <div class="card-header text-center">
                     <span style="border-radius: 16px; padding: 7px;" class="align-middle bg-danger"> ${rating} <i class="fas fa-star"></i> rating</span>
                     <span style="border-radius: 16px; padding: 7px;" class="align-middle bg-danger"> ${product.deliveries} orders</span>

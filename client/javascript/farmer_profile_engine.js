@@ -1,3 +1,6 @@
+const { abi } = require('../../ethereum/build/AgrigrowRoot.json');
+// import { abi } from '../../ethereum/build/AgrigrowRoot.json';
+
 // Selecting input entries
 const deliveries = document.getElementById('deliveries');
 const _name = document.getElementById('_name');
@@ -20,6 +23,7 @@ const declare = document.getElementById('declare');
 
 const details = { _phone, _gst, _pan, _bank, _address, _city, _state, _pin };
 let set = false;
+console.log(abi);
 
 // Loads the profile
 document.addEventListener('DOMContentLoaded', async e => {
