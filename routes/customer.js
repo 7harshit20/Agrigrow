@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express();
 const authenticate = require('../middleware/authenticate')
-const admin = require('../middleware/admin')
 const db = require('../config/db');
 
 
@@ -112,6 +111,22 @@ router.put('/graf/:id', authenticate, async (req, res) => {
     [result] = await db.promise().query(sql, data);
     sql = 'UPDATE product SET stars = stars + ?, feedbacks = feedbacks + ?  WHERE id= ?;';
     data = [ri, fi, req.body.product_id];
+    [result] = await db.promise().query(sql, data);
+    res.send(result);
+});
+
+router.get('/payment/:id', authenticate, async (req, res) => {
+    let sql, data, result;
+    // sql = 'UPDATE orders SET paid = true WHERE id = ?';
+    // data = [req.body.id];
+    [result] = await db.promise().query(sql, data);
+    res.send(result);
+});
+
+router.put('/order/:id', authenticate, async (req, res) => {
+    let sql, data, result;
+    sql = 'UPDATE orders SET paid = true WHERE id = ?';
+    data = [req.body.id];
     [result] = await db.promise().query(sql, data);
     res.send(result);
 });

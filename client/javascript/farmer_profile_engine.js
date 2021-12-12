@@ -1,5 +1,5 @@
-const { abi } = require('../../ethereum/build/AgrigrowRoot.json');
-// import { abi } from '../../ethereum/build/AgrigrowRoot.json';
+const agrigrowRoot = require('../../ethereum/agrigrowRoot');
+const web3 = require('../../ethereum/web3');
 
 // Selecting input entries
 const deliveries = document.getElementById('deliveries');
@@ -23,7 +23,6 @@ const declare = document.getElementById('declare');
 
 const details = { _phone, _gst, _pan, _bank, _address, _city, _state, _pin };
 let set = false;
-console.log(abi);
 
 // Loads the profile
 document.addEventListener('DOMContentLoaded', async e => {
@@ -71,21 +70,37 @@ document.addEventListener('DOMContentLoaded', async e => {
 // Save new profile
 saveBtn.addEventListener('click', async (e) => {
 
+    saveBtn.innerHTML = 'Loading...';
+
     let unfilled = false;
     if (!_phone.value || !_gst.value || !_pan.value || !_bank.value || !_address.value || !_city.value || !_state.value || !_pin.value) {
         displayError("form-control form-control-lg bg-warning text-dark", "Please fill in all the fields", form, pos);
         $('html, body').animate({ scrollTop: 0 }, 'fast');
         unfilled = true;
+        saveBtn.innerHTML = ' Save details and deploy my contract';
         return;
     }
 
     if (!_terms.checked && !unfilled) {
         displayError("form-control form-control-lg bg-warning text-dark", "Please check the box and declare the information is correct", form, pos);
         $('html, body').animate({ scrollTop: 0 }, 'fast');
+        saveBtn.innerHTML = ' Save details and deploy my contract';
+        return;
+    }
+
+    // Deploying contract for seller 
+    let address;
+    try {
+        const accounts = await web3.eth.getAccounts();
+        await agrigrowRoot.methods.createSellerContract().send({ from: accounts[0] });
+        address = await agrigrowRoot.methods.getContactAddress(accounts[0]).call();
+    } catch (err) {
+        alert(`Contract not saved ${err} `);
         return;
     }
 
     const farmer_profile = {
+        contract: address,
         phone: _phone.value,
         gst: _gst.value,
         pan: _pan.value,
@@ -108,6 +123,9 @@ saveBtn.addEventListener('click', async (e) => {
 
     // Reloads the page to display changes
     set = true;
+
+    alert(`Contract deployed successfully with address ${address}`);
+    saveBtn.innerHTML = ' Save details and deploy my contract';
     location.reload();
 });
 

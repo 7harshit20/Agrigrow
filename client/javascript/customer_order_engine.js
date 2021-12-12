@@ -1,8 +1,12 @@
+const { abi } = require('../../ethereum/build/Agrigrow.json')
+const web3 = require("../../ethereum/web3");
 const output = document.getElementById('display');
 const rafsubmit = document.getElementById('rafsubmit');
 const form = document.getElementById('_form');
 const pos = document.getElementById('pos');
 const cont = document.getElementById('cont');
+const _orderId = document.getElementById('_orderId');
+const pay = document.getElementById('pay');
 let soi, spi;
 
 // Loads the placed order 
@@ -128,6 +132,41 @@ rafsubmit.addEventListener('click', async (e) => {
     // Closes modal
     $('#giveraf').modal('hide');
     displayError('form-control form-control-lg bg-warning', 'Rating and Feedback saved', cont, display,)
+});
+
+pay.addEventListener('click', async () => {
+    const order_id = _orderId.value;
+
+    // fetch order value and address
+
+    let order_value = '0.0001', address = '0xcf4cA3f8B7d49D9F81b32DC1Be5474d4e5a4dcb8', agrigrow;
+    pay.innerText = 'Loading...'
+    try {
+        const accounts = await web3.eth.getAccounts();
+        agrigrow = new web3.eth.Contract(abi, address);
+        const payable = web3.utils.toWei(order_value, 'ether');
+        await agrigrow.methods.pay(payable).send({ from: accounts[0], value: payable });
+    } catch (err) {
+        pay.innerText = 'Pay';
+        alert(`Payment not done, ${err} `);
+        $('#payOrder').modal('hide');
+        return;
+    }
+
+    // Request to update order to paid
+    const res = await fetch(`https://agms.herokuapp.com/customer/order/${order_id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-auth-token': sessionStorage.getItem('token')
+        }
+    });
+    console.log(await res.json());
+
+    pay.innerText = 'Pay';
+    alert(`Payment done for order id ${order_id}`);
+    $('#payOrder').modal('hide');
+
 });
 
 
