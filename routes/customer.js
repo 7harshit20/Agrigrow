@@ -117,16 +117,16 @@ router.put('/graf/:id', authenticate, async (req, res) => {
 
 router.get('/payment/:id', authenticate, async (req, res) => {
     let sql, data, result;
-    // sql = 'UPDATE orders SET paid = true WHERE id = ?';
-    // data = [req.body.id];
+    sql = 'SELECE * FROM orders WHERE id=?';
+    data = [req.params.id];
     [result] = await db.promise().query(sql, data);
-    res.send(result);
+    console.log(result);
 });
 
 router.put('/order/:id', authenticate, async (req, res) => {
     let sql, data, result;
     sql = 'UPDATE orders SET paid = true WHERE id = ?';
-    data = [req.body.id];
+    data = [req.params.id];
     [result] = await db.promise().query(sql, data);
     res.send(result);
 });

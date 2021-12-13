@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
                         Quantity ordered: ${order.quantity} kg <br><br>
                     </div>
                     <div class="card-footer text-center" id="shipOrd">
-                        <h5 class="card-title  text-center">Order price: &#8377 ${order.quantity * product.price} </h5>
+                        <h5 class="card-title  text-center">Order price:<i class="fab fa-ethereum"></i> ${order.quantity * product.price} </h5>
                     </div>
                </div>
             </div>

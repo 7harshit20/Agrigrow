@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
                     <div class="card-body"> 
                         <p class="card-text text-center">${product.desction}</p><br>
                         <div class="text-center">
-                        <h5 class="card-title">Price: &#8377 ${product.price}/- per kg</h5>
+                        <h5 class="card-title">Price: ${product.price}<i class="fab fa-ethereum"></i></h5>
                         <h5 class="card-title ">
                         Availability: ${product.quantity} kg
                         </h5>

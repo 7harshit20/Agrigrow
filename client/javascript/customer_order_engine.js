@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
                         Seller's phone no. : ${farmer.phone} <br><br>
                         Transporter's phone no. : ${order.transporter_id ? transporter.phone : 'Transporter not assigned'} <br><br>
                         Delivery address: <br> ${order.address} <br><br>
-                        <h5 class="card-title  text-center">Order price: &#8377 ${order.quantity * product.price} </h5>
+                        <h5 class="card-title  text-center">Order price:<i class="fab fa-ethereum"></i> ${order.quantity * product.price} </h5>
                     </div>
                     <div style="display: ${order.state === 'delivered' ? 'block' : 'none'};" class="card-footer text-center" id="${order.product_id}">
                         <button data-toggle="modal" data-target="#giveraf" class=" _special btn btn-primary w-100 d-block" id="${order.id}">Give Rating and feedback</button>
@@ -138,6 +138,13 @@ pay.addEventListener('click', async () => {
     const order_id = _orderId.value;
 
     // fetch order value and address
+    // const res = await fetch(`https://agms.herokuapp.com/customer/payment/${order_id}`, {
+    //     method: 'GET',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'x-auth-token': sessionStorage.getItem('token')
+    //     }
+    // });
 
     let order_value = '0.0001', address = '0xcf4cA3f8B7d49D9F81b32DC1Be5474d4e5a4dcb8', agrigrow;
     pay.innerText = 'Loading...'
