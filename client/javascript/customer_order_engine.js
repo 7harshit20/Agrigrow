@@ -79,9 +79,9 @@ document.addEventListener('DOMContentLoaded', async (e) => {
                         Seller's phone no. : ${farmer.phone} <br><br>
                         Transporter's phone no. : ${order.transporter_id ? transporter.phone : 'Transporter not assigned'} <br><br>
                         Delivery address: <br> ${order.address} <br><br>
-                        <h5 class="card-title  text-center">Order price:<i class="fab fa-ethereum"></i> ${order.quantity * product.price} </h5>
+                        <h5 class="card-title  text-center">Order price: ${order.quantity * product.price}<i class="fab fa-ethereum"></i><br><br>Paid: ${order.paid ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-times-circle"></i>'} </h5>
                     </div>
-                    <div style="display: ${order.state === 'delivered' ? 'block' : 'none'};" class="card-footer text-center" id="${order.product_id}">
+                    <div style="display: ${order.paid ? 'block' : 'none'};" class="card-footer text-center" id="${order.product_id}">
                         <button data-toggle="modal" data-target="#giveraf" class=" _special btn btn-primary w-100 d-block" id="${order.id}">Give Rating and feedback</button>
                     </div>
                </div>
@@ -138,41 +138,43 @@ pay.addEventListener('click', async () => {
     const order_id = _orderId.value;
 
     // fetch order value and address
-    // const res = await fetch(`https://agms.herokuapp.com/customer/payment/${order_id}`, {
-    //     method: 'GET',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'x-auth-token': sessionStorage.getItem('token')
-    //     }
-    // });
-
-    let order_value = '0.0001', address = '0xcf4cA3f8B7d49D9F81b32DC1Be5474d4e5a4dcb8', agrigrow;
-    pay.innerText = 'Loading...'
-    try {
-        const accounts = await web3.eth.getAccounts();
-        agrigrow = new web3.eth.Contract(abi, address);
-        const payable = web3.utils.toWei(order_value, 'ether');
-        await agrigrow.methods.pay(payable).send({ from: accounts[0], value: payable });
-    } catch (err) {
-        pay.innerText = 'Pay';
-        alert(`Payment not done, ${err} `);
-        $('#payOrder').modal('hide');
-        return;
-    }
-
-    // Request to update order to paid
-    const res = await fetch(`https://agms.herokuapp.com/customer/order/${order_id}`, {
-        method: 'PUT',
+    const res = await fetch(`https://agms.herokuapp.com/customer/payment/${order_id}`, {
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'x-auth-token': sessionStorage.getItem('token')
         }
     });
-    console.log(await res.json());
+    const data = await res.json();
+    console.log(data);
 
-    pay.innerText = 'Pay';
-    alert(`Payment done for order id ${order_id}`);
-    $('#payOrder').modal('hide');
+    // let order_value = data.price, address = data.address, agrigrow;
+    // pay.innerText = 'Loading...'
+    // try {
+    //     const accounts = await web3.eth.getAccounts();
+    //     agrigrow = new web3.eth.Contract(abi, address);
+    //     const payable = web3.utils.toWei(order_value, 'ether');
+    //     await agrigrow.methods.pay(payable).send({ from: accounts[0], value: payable });
+    // } catch (err) {
+    //     pay.innerText = 'Pay';
+    //     alert(`Payment not done, ${err} `);
+    //     $('#payOrder').modal('hide');
+    //     return;
+    // }
+
+    // // Request to update order to paid
+    // const res = await fetch(`https://agms.herokuapp.com/customer/order/${order_id}`, {
+    //     method: 'PUT',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'x-auth-token': sessionStorage.getItem('token')
+    //     }
+    // });
+    // console.log(await res.json());
+
+    // pay.innerText = 'Pay';
+    // alert(`Payment done for order id ${order_id}`);
+    // $('#payOrder').modal('hide');
 
 });
 

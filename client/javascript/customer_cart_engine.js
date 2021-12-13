@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <th scope="row">${num++}</th>
             <td>${product.name}</td>
             <td>${item.quantity} kg </td>
-            <td>&#8377 ${product.price * item.quantity}</td>
+            <td>Price: ${product.price * item.quantity}<i class="fab fa-ethereum"></i></td>
             <td><a id="check"><i class="fas fa-trash delete" id="${item.id}"></i></a> </td>
           </tr>
         `
