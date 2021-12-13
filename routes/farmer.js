@@ -16,7 +16,7 @@ router.get('/get_profile', authenticate, async (req, res) => {
 
 router.post('/set_profile', authenticate, async (req, res) => {
     let sql, data;
-    sql = 'UPDATE farmer SET contactAddress=? phone=?,gst=?,pan=?,bank=?,address=?, city=?, state=?, pin=? WHERE id= ?;'
+    sql = 'UPDATE farmer SET contactAddress=?,phone=?,gst=?,pan=?,bank=?,address=?, city=?, state=?, pin=? WHERE id= ?;'
     data = [req.body.contract, req.body.phone, req.body.gst, req.body.pan, req.body.bank, req.body.address, req.body.city, req.body.state, req.body.pin, req.user.id];
     const [result] = await db.promise().query(sql, data);
     res.send(result);
