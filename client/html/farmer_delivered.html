@@ -110,9 +110,14 @@
           </div>
           <div class="modal-body">
             <form id="_form">
-              <div class="form-group" id="pos">
-                <label>Amount</label>
-                <input id="_amount" type="number" class="form-control" />
+              <label for="price">Amount in ether</label>
+              <div class="input-group mb-2 mr-sm-2">
+                <input type="number" class="form-control" id="_amount" />
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fab fa-ethereum"></i>
+                  </div>
+                </div>
               </div>
             </form>
           </div>

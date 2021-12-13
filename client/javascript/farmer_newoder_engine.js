@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
                         Buyer's phone no. : ${order.mobile} <br><br>
                         Available quantity : ${product.quantity} kg <br><br>
                         Quantity Needed: ${order.quantity} kg <br><br>
-                        <h5 class="card-title  text-center">Order price:<i class="fab fa-ethereum"></i> ${order.quantity * product.price} </h5>
+                        <h5 class="card-title  text-center">Order price: ${order.quantity * product.price}<i class="fab fa-ethereum"></i></h5>
                     </div>
                     <div class="card-footer text-center" id="${product.quantity - order.quantity}">
                         <button id="${order.id}" class="btn btn-primary w-100 d-block acceptOrd">Accept Order</button>

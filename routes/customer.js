@@ -128,7 +128,8 @@ router.get('/payment/:id', authenticate, async (req, res) => {
     [res3] = await db.promise().query(sql, data);
     let rtob = {
         price: result[0].quantity * res2[0].price,
-        address: res3[0].contactAddress
+        address: res3[0].contactAddress,
+        state: result[0].state
     };
     res.send(rtob);
 });

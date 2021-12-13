@@ -138,44 +138,48 @@ pay.addEventListener('click', async () => {
     const order_id = _orderId.value;
 
     // fetch order value and address
-    const res = await fetch(`https://agms.herokuapp.com/customer/payment/${order_id}`, {
+    const res0 = await fetch(`https://agms.herokuapp.com/customer/payment/${order_id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'x-auth-token': sessionStorage.getItem('token')
         }
     });
-    const data = await res.json();
-    console.log(data);
+    const data = await res0.json();
 
-    // let order_value = data.price, address = data.address, agrigrow;
-    // pay.innerText = 'Loading...'
-    // try {
-    //     const accounts = await web3.eth.getAccounts();
-    //     agrigrow = new web3.eth.Contract(abi, address);
-    //     const payable = web3.utils.toWei(order_value, 'ether');
-    //     await agrigrow.methods.pay(payable).send({ from: accounts[0], value: payable });
-    // } catch (err) {
-    //     pay.innerText = 'Pay';
-    //     alert(`Payment not done, ${err} `);
-    //     $('#payOrder').modal('hide');
-    //     return;
-    // }
+    if (data.state !== 'delivered') {
+        alert('Payments can be made only after order is delivered');
+        return;
+    }
 
-    // // Request to update order to paid
-    // const res = await fetch(`https://agms.herokuapp.com/customer/order/${order_id}`, {
-    //     method: 'PUT',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'x-auth-token': sessionStorage.getItem('token')
-    //     }
-    // });
-    // console.log(await res.json());
+    let order_value = data.price.toString(), address = data.address, agrigrow;
+    pay.innerText = 'Loading...'
+    try {
+        const accounts = await web3.eth.getAccounts();
+        agrigrow = new web3.eth.Contract(abi, address);
+        const payable = web3.utils.toWei(order_value, 'ether');
+        await agrigrow.methods.pay(payable).send({ from: accounts[0], value: payable });
+    } catch (err) {
+        pay.innerText = 'Pay';
+        alert(`Payment not done, ${err} `);
+        $('#payOrder').modal('hide');
+        return;
+    }
 
-    // pay.innerText = 'Pay';
-    // alert(`Payment done for order id ${order_id}`);
-    // $('#payOrder').modal('hide');
+    // Request to update order to paid
+    const res = await fetch(`https://agms.herokuapp.com/customer/order/${order_id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-auth-token': sessionStorage.getItem('token')
+        }
+    });
+    console.log(await res.json());
 
+    pay.innerText = 'Pay';
+    alert(`Payment done for order id ${order_id}`);
+    $('#payOrder').modal('hide');
+    location.reload();
 });
 
 

@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
                         Transporter's phone : ${tsp.phone} <br><br>
                         Delivery address: <br> ${order.address} <br><br>
                         <h5 class="card-title  text-center">Quantity Delivered: ${order.quantity} kg</h5>
-                        <h5 class="card-title  text-center">Amount recieved:<i class="fab fa-ethereum"></i> ${order.quantity * product.price} </h5>
+                        <h5 class="card-title  text-center">Paid: ${order.paid ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-times-circle"></i>'} </h5>
                     </div>
                </div>
             </div>
@@ -72,7 +72,16 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 balance.addEventListener('click', async () => {
 
     // fetch and address
-    let address = '0xcf4cA3f8B7d49D9F81b32DC1Be5474d4e5a4dcb8', agrigrow, bln;
+    const res = await fetch('https://agms.herokuapp.com/farmer/get_profile', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-auth-token': sessionStorage.getItem('token')
+        }
+    });
+    const farmer = await res.json();
+
+    let address = farmer.contactAddress, agrigrow, bln;
     balance.innerText = 'Loading...'
     try {
         agrigrow = new web3.eth.Contract(abi, address);
@@ -102,8 +111,7 @@ receive.addEventListener('click', async () => {
     });
     const farmer = await res.json();
 
-    let address = '0xcf4cA3f8B7d49D9F81b32DC1Be5474d4e5a4dcb8', agrigrow;
-    // address = farmer.contract;
+    let address = farmer.contactAddress, agrigrow;
     receive.innerText = 'Loading...'
     try {
         const accounts = await web3.eth.getAccounts();

@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
                         Transporter's phone : ${tsp.phone} <br>
                     </div>
                     <div class="card-footer text-center" id="shipOrd">
-                        <h5 class="card-title  text-center">Order price:<i class="fab fa-ethereum"></i> ${order.quantity * product.price} </h5>
+                        <h5 class="card-title  text-center">Order price: ${order.quantity * product.price}<i class="fab fa-ethereum"></i></h5>
                     </div>
                </div>
             </div>
