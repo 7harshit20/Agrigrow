@@ -1,6 +1,9 @@
 const output = document.getElementById('display');
 
+// Loads the feedback
 document.addEventListener('DOMContentLoaded', async (e) => {
+
+    // Request to fetch feedback
     const res = await fetch('https://agms.herokuapp.com/farmer/getraf', {
         method: 'GET',
         headers: {
@@ -9,6 +12,8 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         }
     });
     const data = await res.json();
+
+    // Setting up html and inserting it in dom
     let num = 0;
     data.forEach(async (order) => {
         const response = await fetch(`https://agms.herokuapp.com/customer/getProducts/id/${order.product_id}`, {
@@ -43,6 +48,8 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     });
 });
 
+
+// logs out user
 document.getElementById('logout').addEventListener('click', function () {
     sessionStorage.removeItem('token');
     location.href = "../html/index.html";

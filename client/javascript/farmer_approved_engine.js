@@ -1,6 +1,9 @@
 const output = document.getElementById('display');
 
+// Loads the accepted order
 document.addEventListener('DOMContentLoaded', async (e) => {
+
+    // Request to fetch new orders
     const res = await fetch('https://agms.herokuapp.com/farmer/acceptedProducts', {
         method: 'GET',
         headers: {
@@ -9,8 +12,11 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         }
     });
     const data = await res.json();
-    console.log(data);
+
+    // Displaying all the fetched orders
     data.forEach(async (order, index) => {
+
+        // Fetches details to buyer 
         const response = await fetch(`https://agms.herokuapp.com/customer/getProducts/id/${order.product_id}`, {
             method: 'GET',
             headers: {
@@ -20,6 +26,8 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 
         });
         const product = await response.json()
+
+        // Setting up html and placing it in dom
         let colour = 'success';
         if (index % 2 !== 0) colour = 'dark';
         output.innerHTML +=
@@ -36,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
                         Quantity ordered: ${order.quantity} kg <br><br>
                     </div>
                     <div class="card-footer text-center" id="shipOrd">
-                        <h5 class="card-title  text-center">Order price: &#8377 ${order.quantity * product.price} </h5>
+                        <h5 class="card-title  text-center">Order price: ${order.quantity * product.price}<i class="fab fa-ethereum"></i></h5>
                     </div>
                </div>
             </div>
@@ -45,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 });
 
 
-
+// Logs out the user
 document.getElementById('logout').addEventListener('click', function () {
     sessionStorage.removeItem('token');
     location.href = "../html/index.html";

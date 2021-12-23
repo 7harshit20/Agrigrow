@@ -17,7 +17,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../css/customer_homepage_style.css" />
-    <title>Customer Homepage</title>
+    <title>AgriGrow</title>
   </head>
 
   <body data-target="#main-nav">
@@ -59,6 +59,41 @@
       </div>
     </nav>
     <!-- NAV BAR END -->
+
+    <div class="container mt-3" id="btncon">
+      <button
+        data-toggle="modal"
+        data-target="#payOrder"
+        class="btn btn-primary w-100"
+        id="paybtn"
+      >
+        Pay Using Ethereum
+      </button>
+    </div>
+
+    <div class="modal fade text-dark" id="payOrder">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Pay using ethereum</h5>
+            <button class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="_form">
+              <div class="form-group" id="pos">
+                <label for="rate">Order id</label>
+                <input id="_orderId" type="number" class="form-control" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button id="pay" class="btn btn-primary btn-block">Pay</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <section class="p-3">
       <div class="container" id="cont">
@@ -118,6 +153,6 @@
       integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
       crossorigin="anonymous"
     ></script>
-    <script src="../javascript/customer_order_engine.js"></script>
+    <script type="text/javascript" src="../dist/bundle2.js"></script>
   </body>
 </html>

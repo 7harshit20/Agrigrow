@@ -1,7 +1,8 @@
 {
-    "private_key": "h72@e32",
-    "database_host": "remotemysql.com",
-    "database_user": "sTH3IO9kFf",
-    "database_name": "sTH3IO9kFf",
-    "database_password": "M3Xkuyrx8f"
+    "private_key": "h43@ffr",
+    "database_host": "localhost",
+    "database_user": "root",
+    "database_name": "agricultural_management_system",
+    "database_password": "7harshit20"
 }
+

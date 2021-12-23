@@ -1,6 +1,9 @@
 const output = document.getElementById('display');
 
+// Loads the new recieved order
 document.addEventListener('DOMContentLoaded', async (e) => {
+
+    // Request to fetch new orders
     const res = await fetch('https://agms.herokuapp.com/farmer/newProducts', {
         method: 'GET',
         headers: {
@@ -9,7 +12,11 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         }
     });
     const data = await res.json();
+
+    // Displaying all the fetched orders
     data.forEach(async (order, index) => {
+
+        // Fetches details to buyer 
         const response = await fetch(`https://agms.herokuapp.com/customer/getProducts/id/${order.product_id}`, {
             method: 'GET',
             headers: {
@@ -19,6 +26,8 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 
         });
         const product = await response.json()
+
+        // Setting up html and placing it in dom
         let colour = 'success';
         if (index % 2 !== 0) colour = 'dark';
         output.innerHTML +=
@@ -34,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
                         Buyer's phone no. : ${order.mobile} <br><br>
                         Available quantity : ${product.quantity} kg <br><br>
                         Quantity Needed: ${order.quantity} kg <br><br>
-                        <h5 class="card-title  text-center">Order price: &#8377 ${order.quantity * product.price} </h5>
+                        <h5 class="card-title  text-center">Order price: ${order.quantity * product.price}<i class="fab fa-ethereum"></i></h5>
                     </div>
                     <div class="card-footer text-center" id="${product.quantity - order.quantity}">
                         <button id="${order.id}" class="btn btn-primary w-100 d-block acceptOrd">Accept Order</button>
@@ -45,20 +54,16 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     });
 });
 
+// Changes new orders to accepted orders
 output.addEventListener('click', async (e) => {
     if (!e.target.className.includes('acceptOrd')) return;
-    await fetch(`https://agms.herokuapp.com/farmer/newProducts/${e.target.id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'x-auth-token': sessionStorage.getItem('token')
-        },
-    });
 
+    // Specifies new quantity to be set
     const reqObj = {
         remQuantity: e.target.parentElement.id,
         product_id: e.target.parentElement.parentElement.id
     }
+    // Request to change order state and reduce available quantity
     await fetch(`https://agms.herokuapp.com/farmer/newProducts/${e.target.id}`, {
         method: 'PUT',
         headers: {
@@ -67,10 +72,12 @@ output.addEventListener('click', async (e) => {
         },
         body: JSON.stringify(reqObj)
     });
+
+    // Reload the window to display changes
     location.reload();
 });
 
-
+// Logs out the user
 document.getElementById('logout').addEventListener('click', function () {
     sessionStorage.removeItem('token');
     location.href = "../html/index.html";

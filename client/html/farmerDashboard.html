@@ -10,6 +10,10 @@
       integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
       crossorigin="anonymous"
     />
+    <script
+      src="https://kit.fontawesome.com/d6872ee7e0.js"
+      crossorigin="anonymous"
+    ></script>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
@@ -17,7 +21,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../css/farmerDashboard_style.css" />
-    <title>Homepage</title>
+    <title>AgriGrow</title>
   </head>
 
   <body data-target="#main-nav">
@@ -120,9 +124,14 @@
                   <div class="input-group-text">kg</div>
                 </div>
               </div>
-              <div class="form-group">
-                <label for="price">Price per unit</label>
-                <input id="product_price" type="number" class="form-control" />
+              <label for="price">Price per kg</label>
+              <div class="input-group mb-2 mr-sm-2">
+                <input type="number" class="form-control" id="product_price" />
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fab fa-ethereum"></i>
+                  </div>
+                </div>
               </div>
               <label for="desc">Description</label>
               <div class="form-group">

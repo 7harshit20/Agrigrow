@@ -14,11 +14,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@truffle/hdwallet-provider": "^2.0.0",
     "bcrypt": "^5.0.1",
+    "browserify": "^17.0.0",
     "compression": "^1.7.4",
     "config": "^3.3.6",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "fs-extra": "^10.0.0",
+    "ganache-cli": "^6.12.2",
     "helmet": "^4.6.0",
     "joi": "^17.4.2",
     "joi-password": "^1.6.0",
@@ -27,6 +32,8 @@
     "mongoose": "^6.0.12",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.2",
-    "nodemon": "^2.0.14"
+    "nodemon": "^2.0.14",
+    "solc": "^0.8.10",
+    "web3": "^1.6.1"
   }
 }

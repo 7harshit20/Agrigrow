@@ -17,15 +17,12 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../css/farmerDashboard_style.css" />
-    <title>Homepage</title>
+    <title>AgriGrow</title>
   </head>
 
   <body data-target="#main-nav">
     <!-- NAV BAR START -->
-    <nav
-      class="navbar navbar-expand-md bg-dark navbar-dark fixed-top"
-      id="main-nav"
-    >
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark" id="main-nav">
       <div class="container">
         <h3 class="display-6"><i class="fas fa-seedling"></i>AgriGrow</h3>
         <button
@@ -90,8 +87,64 @@
     </nav>
     <!-- NAV BAR END -->
 
+    <div class="container mt-3">
+      <button
+        data-toggle="modal"
+        data-target="#payOrder"
+        class="btn btn-primary w-100"
+        id="paybtn"
+      >
+        Withdraw Ethereum
+      </button>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal fade text-dark" id="payOrder">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Withdraw ethereum</h5>
+            <button class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="_form">
+              <label for="price">Amount in ether</label>
+              <div class="input-group mb-2 mr-sm-2">
+                <input type="number" class="form-control" id="_amount" />
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fab fa-ethereum"></i>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <div
+              class="btn-group w-100"
+              role="group"
+              aria-label="Basic mixed styles example"
+            >
+              <button
+                type="button"
+                id="get_blance"
+                class="btn btn-success w-25"
+              >
+                Balance
+              </button>
+              <button type="button" id="receive" class="btn btn-primary w-75">
+                Receive
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- DISPLAY PRODUCTS -->
-    <section class="p-5 mt-5">
+    <section class="p-5">
       <div class="container">
         <div id="display" class="row mb-4"></div>
       </div>
@@ -112,6 +165,6 @@
       integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
       crossorigin="anonymous"
     ></script>
-    <script src="../javascript/farmer_delivered_engine.js"></script>
+    <script type="text/javascript" src="../dist/bundle3.js"></script>
   </body>
 </html>

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express();
 const authenticate = require('../middleware/authenticate')
-const admin = require('../middleware/admin')
 const db = require('../config/db');
 
 
@@ -112,6 +111,33 @@ router.put('/graf/:id', authenticate, async (req, res) => {
     [result] = await db.promise().query(sql, data);
     sql = 'UPDATE product SET stars = stars + ?, feedbacks = feedbacks + ?  WHERE id= ?;';
     data = [ri, fi, req.body.product_id];
+    [result] = await db.promise().query(sql, data);
+    res.send(result);
+});
+
+router.get('/payment/:id', authenticate, async (req, res) => {
+    let sql, data, result, res2, res3;
+    sql = 'SELECT * FROM orders WHERE id=?';
+    data = [req.params.id];
+    [result] = await db.promise().query(sql, data);
+    sql = 'SELECT * FROM product WHERE id=?';
+    data = [result[0].product_id];
+    [res2] = await db.promise().query(sql, data);
+    sql = 'SELECT * FROM farmer WHERE id=?';
+    data = [res2[0].farmer_id];
+    [res3] = await db.promise().query(sql, data);
+    let rtob = {
+        price: result[0].quantity * res2[0].price,
+        address: res3[0].contactAddress,
+        state: result[0].state
+    };
+    res.send(rtob);
+});
+
+router.put('/order/:id', authenticate, async (req, res) => {
+    let sql, data, result;
+    sql = 'UPDATE orders SET paid = true WHERE id = ?';
+    data = [req.params.id];
     [result] = await db.promise().query(sql, data);
     res.send(result);
 });

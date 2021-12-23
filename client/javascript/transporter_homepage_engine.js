@@ -1,7 +1,10 @@
 const output = document.getElementById('display');
 const con = document.getElementById('con');
 
+// Loads the order open for transportation
 document.addEventListener('DOMContentLoaded', async (e) => {
+
+    // Request to fetch orders
     const res = await fetch('https://agms.herokuapp.com/transporter/acceptedProducts', {
         method: 'GET',
         headers: {
@@ -10,7 +13,11 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         }
     });
     const data = await res.json();
+
+    // Displaying all the fetched orders
     data.forEach(async (order, index) => {
+
+        // Fetches details to buyer
         const response = await fetch(`https://agms.herokuapp.com/customer/getProducts/id/${order.product_id}`, {
             method: 'GET',
             headers: {
@@ -20,6 +27,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         });
         const product = await response.json()
 
+        // Fetches details to seller
         const result = await fetch(`https://agms.herokuapp.com/customer/getFarmer/${product.farmer_id}`, {
             method: 'GET',
             headers: {
@@ -28,6 +36,8 @@ document.addEventListener('DOMContentLoaded', async (e) => {
             }
         });
         const farmer = await result.json();
+
+        // Setting up html and placing it in dom
         let colour = 'success';
         if (index % 2 !== 0) colour = 'dark';
         output.innerHTML +=
@@ -54,9 +64,11 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     });
 });
 
+// Changes order state to shipped
 output.addEventListener('click', async (e) => {
     if (e.target.parentElement.id !== 'shipOrd') return;
 
+    // Checks if profile is set up 
     const checkres = await fetch('https://agms.herokuapp.com/transporter/get_profile', {
         method: 'GET',
         headers: {
@@ -65,12 +77,15 @@ output.addEventListener('click', async (e) => {
         }
     });
     const transporter = await checkres.json();
+
+    // Gives warning if profile is not set up 
     if (!transporter.phone) {
         displayError("form-control form-control-lg bg-warning", "Please complete your profile to ship orders", con, display);
         $('html, body').animate({ scrollTop: 0 }, 'fast');
         return;
     }
 
+    // Request to change order state 
     await fetch(`https://agms.herokuapp.com/transporter/acceptedProducts/${e.target.id}`, {
         method: 'PUT',
         headers: {
@@ -78,11 +93,13 @@ output.addEventListener('click', async (e) => {
             'x-auth-token': sessionStorage.getItem('token')
         },
     });
+
+    // Reload the window to display changes
     location.reload();
 });
 
 
-
+// Displays error
 function displayError(cls, message, place, pos) {
     const error = document.createElement('div');
     error.className = 'form-group';
@@ -100,6 +117,8 @@ function displayError(cls, message, place, pos) {
     }, 3000)
 }
 
+
+// logs out the user
 document.getElementById('logout').addEventListener('click', function () {
     sessionStorage.removeItem('token');
     location.href = "../html/index.html";
